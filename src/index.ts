@@ -89,3 +89,7 @@ export type {
 
 // Helpers (for advanced use)
 export type { StorageAdapter } from './lib/helpers';
+
+// Utilities
+export { withRetry, retryable, Retry } from './lib/retry';
+export type { RetryOptions } from './lib/retry';

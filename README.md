@@ -201,6 +201,40 @@ const { data } = await client
 // data is User[] | null
 ```
 
+## Retry Utility
+
+Automatic retry with exponential backoff for flaky requests:
+
+```typescript
+import { withRetry } from '@aerodb/client';
+
+// Retry a function up to 3 times
+const data = await withRetry(
+  () => client.from('users').execute(),
+  {
+    maxAttempts: 3,
+    initialDelay: 1000,
+    onRetry: (attempt, error, delay) => {
+      console.log(`Retry ${attempt} after ${delay}ms:`, error.message);
+    },
+  }
+);
+```
+
+## Examples
+
+See the [examples](./examples) directory for complete applications:
+
+| Example | Features |
+|---------|----------|
+| [Todo App](./examples/todo-app) | Auth, CRUD, Realtime subscriptions |
+| [Chat App](./examples/chat-app) | Realtime messaging, Presence tracking |
+| [File Upload](./examples/file-upload) | Storage, Signed URLs, Avatar management |
+
+## Contributing
+
+Contributions are welcome! Please read our contributing guide before submitting a PR.
+
 ## License
 
 MIT
